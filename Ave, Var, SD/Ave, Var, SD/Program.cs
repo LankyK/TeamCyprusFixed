@@ -18,13 +18,13 @@ namespace Ave__Var__SD
              }            
         }
 
-        static int[] Input()
+        static float[] Input()
         {
             Console.WriteLine("Input 5 whole integers separated by spaces");
 
             string[] input = Console.ReadLine().Split(null);
 
-            int[] output = new int[input.Length];
+            float[] output = new float[input.Length];
 
             bool success = true;
 
@@ -34,7 +34,7 @@ namespace Ave__Var__SD
             for (int i = 0; i < input.Length; i++)
             {
                 if (success)
-                success = Int32.TryParse(input[i], out output[i]);
+                success = float.TryParse(input[i], out output[i]);
             }
 
             if (!success)
@@ -53,20 +53,31 @@ namespace Ave__Var__SD
 
         static bool PromptDone()
         {
-            Console.WriteLine("Continue? (Y to continue, N to quit)");
+            bool prompting = true;
 
-            string answer = Console.ReadLine();
-
-            Console.Clear();
-
-            if (answer.ToLower().Contains('n'))
+            while (prompting)
             {
-                return false;
+                Console.WriteLine("Continue? (Y to continue, N to quit)");
+
+                string answer = Console.ReadLine();
+
+                Console.Clear();
+
+                if (answer.ToLower().Contains('n'))
+                {
+                    return false;
+                }
+                else if (answer.ToLower().Contains('y'))
+                {
+                    return true;
+                }
+                else
+                {
+                    prompting = true;
+                    Console.Clear();
+                }
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
     }
 }
